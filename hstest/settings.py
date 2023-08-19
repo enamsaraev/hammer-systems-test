@@ -10,16 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-import os 
-
 from pathlib import Path
-
-import environs as environs
-from dotenv import load_dotenv
-
-load_dotenv()
-
-env = environs.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +19,7 @@ SECRET_KEY = 'django-insecure-3csyyg(6g=56zszv_pcl6ca_oyx6be_xf)c#38p8(2cjc5mefv
 
 DEBUG = 0
 
-ALLOWED_HOSTS = ['enamsaraev.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['enamsaraev.pythonanywhere.com']
 
 
