@@ -1,12 +1,11 @@
 import string
 import random
+import time
 
 from dataclasses import dataclass
 from typing import Any
 
 from core.models import User, UserProfile, ActiveUser
-
-from user_management.tasks import send_code
 
 
 @dataclass
@@ -80,7 +79,7 @@ def send_login_code(code, user) -> None:
     user.set_password(code)
     user.save()
 
-    send_code.delay(code=code)
+    time.sleep(2)
 
 
 class InviteCodeHelper:

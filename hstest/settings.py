@@ -10,27 +10,27 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os 
+
 from pathlib import Path
+
+import environs as environs
+from dotenv import load_dotenv
+
+load_dotenv()
+
+env = environs.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+DEBUG = env.bool("DEBUG", default=False)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3csyyg(6g=56zszv_pcl6ca_oyx6be_xf)c#38p8(2cjc5mefv'
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['enamsaraev.pythonanywhere.com']
-CSRF_TRUSTED_ORIGINS = ['enamsaraev.pythonanywhere.com']
-
-# INTERNAL_IPS = [
-#     '127.0.0.1'
-# ]
 
 
 # Application definition
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
 
     'core',
     'user_management',
-    'hstest_celery',
 ]
 
 MIDDLEWARE = [
@@ -86,12 +85,25 @@ WSGI_APPLICATION = 'hstest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if env.bool("SWITCH_DB"):
+    DATABASES = {
+        'default': {
+            "ENGINE": os.environ.get("SQL_ENGINE_TEST"),
+            "NAME": os.environ.get("SQL_DATABASE_TEST"),
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            "ENGINE": os.environ.get("SQL_ENGINE"),
+            "NAME": os.environ.get("SQL_DATABASE"),
+            "USER": os.environ.get("SQL_USER"),
+            "PASSWORD": os.environ.get("SQL_PASSWORD"),
+            "HOST": os.environ.get("SQL_HOST"),
+            "PORT": os.environ.get("SQL_PORT"),
+        }
+    }
 
 
 # Password validation
@@ -154,6 +166,3 @@ AUTH_USER_MODEL = 'core.User'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-
-CELERY_BROKER_URL = "redis://localhost:6379"
-CELERY_RESULT_BACKEND = "redis://localhost:6379"
