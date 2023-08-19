@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-3csyyg(6g=56zszv_pcl6ca_oyx6be_xf)c#38p8(2cjc5mefv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://enamsaraev.pythonanywhere.com']
-CSRF_TRUSTED_ORIGINS = ['https://enamsaraev.pythonanywhere.com']
+ALLOWED_HOSTS = ['enamsaraev.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['enamsaraev.pythonanywhere.com']
 
 # INTERNAL_IPS = [
 #     '127.0.0.1'
