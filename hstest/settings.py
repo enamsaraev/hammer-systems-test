@@ -24,9 +24,9 @@ env = environs.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = 'django-insecure-3csyyg(6g=56zszv_pcl6ca_oyx6be_xf)c#38p8(2cjc5mefv'
 
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = 0
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['*']
@@ -81,24 +81,24 @@ WSGI_APPLICATION = 'hstest.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-if env.bool("SWITCH_DB"):
+switch_db = 0
+if switch_db:
     DATABASES = {
         'default': {
-            "ENGINE": os.environ.get("SQL_ENGINE_TEST"),
-            "NAME": os.environ.get("SQL_DATABASE_TEST"),
+            "ENGINE": 'django.db.backends.sqlite3',
+            "NAME": 'db.sqlite3',
         }
     }
 
 else:
     DATABASES = {
         'default': {
-            "ENGINE": os.environ.get("SQL_ENGINE"),
-            "NAME": os.environ.get("SQL_DATABASE"),
-            "USER": os.environ.get("SQL_USER"),
-            "PASSWORD": os.environ.get("SQL_PASSWORD"),
-            "HOST": os.environ.get("SQL_HOST"),
-            "PORT": os.environ.get("SQL_PORT"),
+            "ENGINE": 'django.db.backends.mysql',
+            "NAME": 'enamsaraev$hstest',
+            "USER": 'enamsaraev',
+            "PASSWORD": 'hstest123',
+            "HOST": 'enamsaraev.mysql.pythonanywhere-services.com',
+            "PORT": '3306',
         }
     }
 
