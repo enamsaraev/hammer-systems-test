@@ -28,8 +28,8 @@ SECRET_KEY = 'django-insecure-3csyyg(6g=56zszv_pcl6ca_oyx6be_xf)c#38p8(2cjc5mefv
 
 DEBUG = 0
 
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['*']
+ALLOWED_HOSTS = ['enamsaraev.pythonanywhere.com',]
+CSRF_TRUSTED_ORIGINS = ['enamsaraev.pythonanywhere.com',]
 
 
 INSTALLED_APPS = [
