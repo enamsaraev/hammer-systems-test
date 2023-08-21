@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'hstest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-switch_db = 1
+switch_db = 0
 if switch_db:
     DATABASES = {
         'default': {
