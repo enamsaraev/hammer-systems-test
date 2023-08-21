@@ -5,6 +5,8 @@ import time
 from dataclasses import dataclass
 from typing import Any
 
+from django.shortcuts import get_object_or_404
+
 from core.models import User, UserProfile, ActiveUser
 
 
@@ -81,6 +83,31 @@ def send_login_code(code, user) -> None:
 
     time.sleep(2)
 
+
+@dataclass
+class AddNewProfileHelper:
+    user_id: int
+    username: str
+    email: str
+
+    def __call__(self, *args: Any, **kwds: Any) -> bool:
+        if not '@' in self.email:
+            return False
+        
+        if self._create_new_profile():
+            return True
+        
+        return False
+
+    def _create_new_profile(self):
+        user = get_object_or_404(User, id=self.user_id)
+        UserProfile.objects.create(
+            user = user,
+            username = self.username,
+            email = self.email,
+            activate_code = False
+        )
+        return True
 
 class InviteCodeHelper:
     def __init__(self, user_id, code) -> None:
