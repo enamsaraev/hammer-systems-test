@@ -36,6 +36,8 @@
 
     http://127.0.0.1:8000/user/login/ | enamsaraev.pythonanywhere.com/user/login/
 
+    {"phone": ""}
+
 ### Response
 
     HTTP/1.1 200 OK | HTTP/1.1 201 Created
@@ -51,6 +53,8 @@
 `POST /user/confirm/`
 
     http://127.0.0.1:8000/user/confirm/ | enamsaraev.pythonanywhere.com/user/confirm/
+
+    {"phone": "", "code": ""}
 
 ### Response
 
@@ -68,6 +72,8 @@
 
     http://127.0.0.1:8000/user/user-profile/ | enamsaraev.pythonanywhere.com/user/user-profile/
 
+    {"user_id": 1}
+
 ### Response
 
     HTTP/1.1 200 OK
@@ -79,13 +85,15 @@
         "activeusers": []
     }
 
-## Get user profile
+## Create user profile
 
 ### Request
 
 `POST /user/user-profile/`
 
     http://127.0.0.1:8000/user/user-profile/ | enamsaraev.pythonanywhere.com/user/user-profile/
+
+    {"user_id": 1, "username": "", "email": ""}
 
 ### Response
 
@@ -98,6 +106,8 @@
 `POST /user-profile/activate-code/`
 
     http://127.0.0.1:8000/user-profile/activate-code/ | enamsaraev.pythonanywhere.com/user-profile/activate-code/
+
+    {"user_id": 1, "code": ""}
 
 ### Response
 
