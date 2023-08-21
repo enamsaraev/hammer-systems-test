@@ -17,7 +17,7 @@
 - В postman вручную отправлял полученный при регистрации csrftoken в headers запроса с помощью ключа X-CSRFTOKEN
 ## Install
 
-    git clone
+    git clone https://github.com/enamsaraev/hammer-systems-test.git
 
 ## Run the app
 
@@ -88,12 +88,7 @@
 
 ### Response
 
-    HTTP/1.1 404 Not Found
-    Date: Thu, 24 Feb 2011 12:36:30 GMT
-    Status: 404 Not Found
-    Connection: close
-    Content-Type: application/json
-    Content-Length: 35
+    HTTP/1.1 200 OK
 
     {
         "username": "",
