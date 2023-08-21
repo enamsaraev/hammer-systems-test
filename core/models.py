@@ -62,6 +62,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'phone'
 
     objects = UserManager()
+    
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
+    def __str__(self) -> str:
+        return self.phone
 
 
 class UserProfile(models.Model):
@@ -89,6 +96,18 @@ class UserProfile(models.Model):
         "Switch activate_code on true if user use invite code"
         self.activate_code = True
         self.save(update_fields=['activate_code'])
+
+    def set_active_user(self, user_profile):
+        "Add a relation to user which code was activated"
+        self.active_user = user_profile.user
+        self.save(update_fields=['active_user'])
+
+    class Meta:
+        verbose_name = 'Профиль пользователя'
+        verbose_name_plural = 'Профили пользователей'
+
+    def __str__(self) -> str:
+        return self.user.phone
         
 class ActiveUser(models.Model):
     """
@@ -105,4 +124,11 @@ class ActiveUser(models.Model):
     
 
     objects = ActiveUserManager()
+
+    class Meta:
+        verbose_name = 'Связи по активации кода приглашения'
+        verbose_name_plural = 'Связи по активации кода приглашения'
+
+    def __str__(self) -> str:
+        return f'{self.user.phone} -> {self.user_profile.user.phone}'
     

@@ -110,6 +110,7 @@ class InviteCodeHelper:
         if user and user_profile:
             ActiveUser.objects.create(user=user, user_profile=user_profile)
             self.from_user_profile.set_activate_code()
+            self.from_user_profile.set_active_user(user_profile)
 
             return user_profile
 

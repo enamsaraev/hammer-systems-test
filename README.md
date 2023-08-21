@@ -15,6 +15,7 @@
 Мои комментарии:
 - Использовал драйвер mysql поскольку на ythonanywhere нет возможности использовать PostgreSQL на бесплатном аккаунте
 - В postman вручную отправлял полученный при регистрации csrftoken в headers запроса с помощью ключа X-CSRFTOKEN
+- В качестве задержки сервера использовал time.sleep(2), изначально вызвал ее в таске celery, но на бесплатный хостинг не получилось все выгрузить
 ## Install
 
     git clone https://github.com/enamsaraev/hammer-systems-test.git
@@ -91,9 +92,12 @@
     HTTP/1.1 200 OK
 
     {
-        "username": "",
-        "email": "",
-        "activate_code": false,
-        "activeusers": []
+        "activated_profile": {
+            "id": "",
+            "username": "",
+            "email": "",
+            "activate_code": false,
+            "activeusers": []
+        }
     }
 
