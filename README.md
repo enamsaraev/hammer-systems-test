@@ -79,6 +79,18 @@
         "activeusers": []
     }
 
+## Get user profile
+
+### Request
+
+`POST /user/user-profile/`
+
+    http://127.0.0.1:8000/user/user-profile/ | enamsaraev.pythonanywhere.com/user/user-profile/
+
+### Response
+
+    HTTP/1.1 200 OK | HTTP/1.1 400 | HTTP/1.1 404
+
 ## Activate invite code
 
 ### Request

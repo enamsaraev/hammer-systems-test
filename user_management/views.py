@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 
 from core.models import ActiveUser
 from user_management.serializers import UserLoginPhoneSerializer, BaseUserLoginSerializer, UserProfileSerializer
-from user_management.helpers import FindUser, UserCreationHelper, LoginCodeCreation, FindUserProfile, send_login_code, InviteCodeHelper
+from user_management.helpers import FindUser, UserCreationHelper, LoginCodeCreation, FindUserProfile, send_login_code, InviteCodeHelper, AddNewProfileHelper
 
 
 class UserLogin(APIView):
@@ -67,6 +67,13 @@ class UserProfile(APIView):
         user_profile_serializer = UserProfileSerializer(user_profile)
 
         return Response(user_profile_serializer.data)
+    
+    def post(self, request):
+        add_new_profile = AddNewProfileHelper(user_id=request.data['user_id'], username=request.data['username'], email=request.data['email'])()
+        if add_new_profile:
+            return Response(status=status.HTTP_201_CREATED)
+        
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class ActivateCode(APIView):    
