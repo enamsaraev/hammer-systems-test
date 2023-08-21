@@ -22,7 +22,7 @@ class BaseUserLoginSerializer(serializers.Serializer):
     code = serializers.CharField(max_length=255)
 
 
-class ActiveUser(serializers.ModelSerializer):
+class ActiveUserSerializer(serializers.ModelSerializer):
     phone = serializers.StringRelatedField(source='user.phone')
 
     class Meta:
@@ -32,7 +32,7 @@ class ActiveUser(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     active_user_code = serializers.StringRelatedField(source='active_user.invite_code')
-    activeusers = ActiveUser(many=True)
+    activeusers = ActiveUserSerializer(many=True)
 
     class Meta:
         model = UserProfile
