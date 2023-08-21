@@ -89,6 +89,6 @@ class ActivateCode(APIView):
             user_profile_serializer = UserProfileSerializer(to_user_profile)
             return Response(status=status.HTTP_200_OK, data={'activated_profile': user_profile_serializer.data})
         
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={'data': to_user_profile})
 
 
