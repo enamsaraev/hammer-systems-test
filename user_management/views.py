@@ -13,7 +13,10 @@ from user_management.helpers import FindUser, UserCreationHelper, LoginCodeCreat
 
 
 class UserLogin(APIView):
-    """User registration"""
+    """
+        User login/registration
+        POST: phone
+    """
 
     permission_classes = [AllowAny,]
 
@@ -26,14 +29,20 @@ class UserLogin(APIView):
     
         if user:
             send_login_code(user=user, code=code)
-        else:
+            return Response(status=status.HTTP_200_OK, data={'code': code})
+        elif not user:
             new_user = UserCreationHelper(phone=phone_serializer.data['phone'], login_code=code)()
             send_login_code(user=new_user, code=code)
-
-        return Response(status=status.HTTP_200_OK, data={'code': code})
+            return Response(status=status.HTTP_201_CREATED, data={'code': code})
+        
+        return Response(status=status.HTTP_400_BAD_REQUEST)
     
 
 class UserConfirmation(APIView):
+    """
+        Confirmation view (get code by phone number)
+        POST: phone, code
+    """
     permission_classes = [AllowAny,]
 
     def post(self, request):
@@ -49,6 +58,10 @@ class UserConfirmation(APIView):
     
 
 class UserProfile(APIView):
+    """
+        Return user profile
+        GET: user_id
+    """
     def get(self, request):
         user_profile = FindUserProfile(user_id=request.data['user_id'])()
         user_profile_serializer = UserProfileSerializer(user_profile)
@@ -57,6 +70,10 @@ class UserProfile(APIView):
 
 
 class ActivateCode(APIView):    
+    """
+        Invite code enter
+        POST: user_id (who activate code), code (whos code is activated)
+    """
     def post(self, request):
         inv = InviteCodeHelper(user_id=request.data['user_id'], code=request.data['code'])
         to_user_profile = inv.make_decision()

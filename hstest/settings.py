@@ -25,11 +25,7 @@ SECRET_KEY = 'django-insecure-3csyyg(6g=56zszv_pcl6ca_oyx6be_xf)c#38p8(2cjc5mefv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['enamsaraev.pythonanywhere.com']
-
-# INTERNAL_IPS = [
-#     '127.0.0.1'
-# ]
+ALLOWED_HOSTS = ['enamsaraev.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
@@ -84,7 +80,7 @@ WSGI_APPLICATION = 'hstest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-switch_db = 0
+switch_db = 1
 if switch_db:
     DATABASES = {
         'default': {

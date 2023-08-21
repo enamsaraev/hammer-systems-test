@@ -31,6 +31,8 @@ class UserManager(BaseUserManager):
     
 
 class ActiveUserManager(models.Manager):
+    "Create a user relation by invite code ativating if its not exists"
+
     def create(self, **obj_data) -> Any:
         if not ActiveUser.objects.filter(user=obj_data['user'], user_profile=obj_data['user_profile']):
             return super().create(**obj_data)
@@ -63,6 +65,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class UserProfile(models.Model):
+    "Custom user profile model"
+
     user = models.OneToOneField('User',
                                 on_delete=models.CASCADE,
                                 related_name='userprofile')
@@ -82,10 +86,16 @@ class UserProfile(models.Model):
                                        related_name='active_user_userprofile')
 
     def set_activate_code(self):
+        "Switch activate_code on true if user use invite code"
         self.activate_code = True
         self.save(update_fields=['activate_code'])
         
 class ActiveUser(models.Model):
+    """
+        Contains a relation abour users who set invite code
+        user: from
+        user_profile: to another user profile whos code was entered
+    """
     user = models.ForeignKey('User',
                              on_delete=models.CASCADE,
                              related_name='user_activeusers')
